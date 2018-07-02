@@ -1,0 +1,24 @@
+mat-toolbar {
+  background: #00a651;
+  button {
+    border: 0;
+    background: transparent;
+    .more-vert {
+      height: 30px;
+      width: 10px;
+      background: url(../../ico/baseline-more_vert-24px.svg) 50% no-repeat;
+    }
+  }
+}
+
+mat-grid-list {
+  padding: 0 !important;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  mat-grid-tile {
+    background: lightblue;
+    img {
+      width: 100%;
+    }
+  }
+}

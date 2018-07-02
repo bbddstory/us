@@ -25,3 +25,19 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Commands
+Create the project with non-css style sheets:
+ng new my-app --style=scss
+ng new my-app --style=sass
+ng new my-app --style=less
+
+Convert existing projects to handle non-css style sheets:
+ng config schematics.@schematics/angular:component.styleext scss
+
+Adding a service worker:
+ng add @angular/pwa
+
+Adding Angular Material:
+npm i --save @angular/material @angular/cdk
+npm i --save @angular/animations
