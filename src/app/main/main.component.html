@@ -1,27 +1,32 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>Custom Toolbar</span>
-    <i class="fa fa-cloud">View</i>
+    <span class="album-info">
+      <span class="album-title">Our Moments Together in this Colourful World</span>
+      <span class="shared-with">Shared with Melinda</span>
+    </span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <!-- <mat-icon>more_vert</mat-icon> -->
-      <div class="more-vert"></div>
+      <i class="more-vert"></i>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
           <!-- <mat-icon>dialpad</mat-icon> -->
-          <i class="fa fa-heart"></i>
-          <span>Redial</span>
+          <i class="ico-holder"></i>
+          <span>Select</span>
         </button>
-        <button mat-menu-item disabled>
+        <button mat-menu-item>
           <!-- <mat-icon>voicemail</mat-icon> -->
-          <i class="fa fa-car"></i>
-          <span>Check voicemail</span>
+          <i class="ico-holder"></i>
+          <span>New Album</span>
         </button>
         <button mat-menu-item>
           <!-- <mat-icon>notifications_off</mat-icon> -->
-          <i class="fa fa-file"></i>
-          <span>Disable alerts</span>
+          <i class="ico-holder"></i>
+          <span>Share Album</span>
+        </button>
+        <button mat-menu-item>
+          <!-- <mat-icon>notifications_off</mat-icon> -->
+          <i class="ico-holder"></i>
+          <span>My Albums</span>
         </button>
       </mat-menu>
     </button>
@@ -128,3 +133,22 @@
   </mat-grid-tile>
 </mat-grid-list>
 <!-- </div> -->
+
+<!-- <div class="fn-btn take-photo" (click)="takePhoto()">
+  <input type="file" accept="image/*" capture="camera" />
+</div> -->
+<label for="take-photo" class="fn-btn take-photo">
+  <input id="take-photo" type="file" accept="image/*" capture="camera" />
+</label>
+<div class="fn-btn add-photo">
+</div>
+
+<mat-button-toggle-group #group="matButtonToggleGroup">
+  <mat-button-toggle value="module" checked>
+    <i class="view-module"></i>
+  </mat-button-toggle>
+  <mat-button-toggle value="stream">
+    <i class="view-stream"></i>
+  </mat-button-toggle>
+</mat-button-toggle-group>
+<!-- <div class="example-selected-value">Selected value: {{group.value}}</div> -->

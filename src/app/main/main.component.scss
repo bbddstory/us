@@ -1,9 +1,27 @@
+$bg_color: #00a651; // #1976d2
 mat-toolbar {
-  background: #00a651;
+  background: $bg_color;
+  color: #fff;
+  .album-info {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    line-height: 1.1;
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .shared-with {
+      font-size: 14px;
+      color: rgba(#000, .3);
+    }
+  }
   button {
     border: 0;
     background: transparent;
+    padding-right: 0;
     .more-vert {
+      display: block;
       height: 30px;
       width: 10px;
       background: url(../../ico/baseline-more_vert-24px.svg) 50% no-repeat;
@@ -16,9 +34,62 @@ mat-grid-list {
   height: calc(100vh - 56px);
   overflow-y: auto;
   mat-grid-tile {
-    background: lightblue;
     img {
       width: 100%;
     }
+  }
+}
+
+.fn-btn {
+  position: absolute;
+  bottom: 15px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 5px 8px 10px rgba(#000, .5);
+}
+
+.ico-holder {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 15px;
+  vertical-align: middle;
+  background: url(../../ico/baseline-closed_caption-24px.svg) 50% no-repeat;
+}
+
+.take-photo {
+  left: 15px;
+  background: $bg_color url(../../ico/baseline-photo_camera-24px.svg) 50% no-repeat;
+}
+
+.add-photo {
+  right: 15px;
+  background: $bg_color url(../../ico/baseline-insert_photo-24px.svg) 50% no-repeat;
+}
+
+#take-photo {
+  display: none;
+}
+
+mat-button-toggle-group {
+  background: $bg_color;
+  position: absolute;
+  bottom: 15px;
+  left: calc(50% - 50px);
+  width: 100px;
+  height: 35px;
+  box-shadow: 0 8px 10px rgba(#000, .5);
+  .view-module {
+    display: block;
+    height: 35px;
+    width: 18px;
+    background: url(../../ico/baseline-view_module-24px.svg) 50% no-repeat;
+  }
+  .view-stream {
+    display: block;
+    height: 35px;
+    width: 18px;
+    background: url(../../ico/baseline-view_stream-24px.svg) 50% no-repeat;
   }
 }

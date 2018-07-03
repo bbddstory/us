@@ -12,4 +12,20 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
+  takePhoto(): void {
+    console.log(123);
+    
+    var promise = navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: { facingMode: "user" }
+    }).then(function (stream) {
+      console.log('abc');
+      
+      /* use the stream */
+    }).catch(function (err) {
+      console.log(err);
+      /* handle the error */
+    });
+  }
+
 }
