@@ -1,8 +1,9 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <span class="album-info">
-      <span class="album-title">只属于我们的美好时光</span>
-      <span class="shared-with">已分享给 Melinda</span>
+      <!-- <span class="album-title">只属于我们的美好时光</span> -->
+      <span class="album-title">Our Time Together</span>
+      <span class="shared-with">Shared with Melinda</span>
     </span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <!-- <mat-icon>more_vert</mat-icon> -->
@@ -36,9 +37,12 @@
 <!-- <div class="item-img" style="background-image: url(https://m.media-amazon.com/images/M/MV5BM2FhYjEyYmYtMDI1Yy00YTdlLWI2NWQtYmEzNzAxOGY1NjY2XkEyXkFqcGdeQXVyNTA3NTIyNDg@._V1_UX182_CR0,0,182,268_AL_.jpg)"></div> -->
 <div class="divider-today">今天</div>
 <div class="masonry-grid-today">
-  <div class="grid-item" *ngFor="let item of items; let i = index">
-    <a href="#">
-      <img src="{{item}}">
+  <!-- <div class="col-width"></div> -->
+  <div class="grid-item" style="height: 120px;" *ngFor="let item of htmlArr; let i = index">
+    <a href="#" [innerHTML]="item | safeHtml">
+      <!-- <img src="{{item}}"> -->
+      <!-- {{image_prefix + item + image_postfix}} -->
+      <!-- <div style="background: url({{item}}) 50% no-repeat;background-size: cover;"></div> -->
     </a>
   </div>
   <!-- <div class="grid-item">

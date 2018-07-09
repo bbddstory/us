@@ -16,6 +16,9 @@ import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ResetComponent } from './reset/reset.component';
 
+import { SanitizeHtmlPipe } from './sanitize-html.pipe';
+
+
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -41,7 +44,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     MainComponent,
     PageNotFoundComponent,
-    ResetComponent
+    ResetComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     RouterModule.forRoot(
@@ -52,7 +56,7 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule, MatMenuModule, MatGridListModule, MatButtonToggleModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

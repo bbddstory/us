@@ -108,18 +108,22 @@ mat-button-toggle-group {
 .masonry-grid-today,
 .masonry-grid-yesterday,
 .masonry-grid-more {
-  // width: 100vw;
+  width: 100vw;
   height: calc(100vh - 106px) !important;
   overflow-y: auto;
   background-color: gray;
   .grid-item {
-    // display: block;
+    display: inline-block;
     margin-top: 7px;
     margin-bottom: 7px;
     margin-left: 1.6%;
-    width: 30%; // height: 0;
+    width: 30%;
+    height: 80px;
     background-color: #00a651; // margin-bottom: 10px;
     box-shadow: 3px 3px 5px rgba(#000, .3);
+    .img-div {
+      height: 80px;
+    }
     a {
       display: block; // height: 0;
     }
