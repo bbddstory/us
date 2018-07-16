@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, OnInit } from '@angular/core';
 // import * as jq from 'jquery';
 
 import { SecurityContext } from '@angular/core';
 // import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-
-
-
 
 @Component({
   selector: 'app-main',
@@ -14,9 +10,13 @@ import { SecurityContext } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  @Input() major: string;
+  changeLog: string[] = [];
 
-  constructor() { }
-
+  constructor() {
+  }
+  
+  elRef: ElementRef;
   local = [
     '../../img/login_bg_bus.jpg',
   ];
@@ -28,9 +28,33 @@ export class MainComponent implements OnInit {
     'https://m.media-amazon.com/images/M/MV5BMmE2M2I4MWYtM2NiOC00OGM0LTllNWQtZDhlMjNlNjg5NzUwXkEyXkFqcGdeQXVyNjczMDc2NDQ@._V1_SY1000_SX1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMzAxNTY3ODg0NF5BMl5BanBnXkFtZTgwMjk2Njk5NDM@._V1_SX1777_CR0,0,1777,937_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BNDg1NDYyNjUxNV5BMl5BanBnXkFtZTgwMTAwNjQxMzI@._V1_SY1000_SX1000_AL_.jpg',
-  ];
+  // ];
   
-  moreItems = [
+  // moreItems = [
+    'https://m.media-amazon.com/images/M/MV5BMTQ2MTgyNzY2MV5BMl5BanBnXkFtZTgwOTA5MjkxNjE@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMGE2NTU5MjctMzYyNy00YjdjLWEwOGItOWNhZTQ2ZTZjY2Q0XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BZWUyMWVlMjEtNjRkYS00YjNlLThmODItYzc1MTQ5NzBiOGM2XkEyXkFqcGdeQXVyNjY5NDczMTk@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjI5OTcwMzIyNF5BMl5BanBnXkFtZTgwNjMxNDMzMTI@._V1_SY1000_CR0,0,1333,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjQwNTgxMTEwNl5BMl5BanBnXkFtZTgwNDc4MjkzNTM@._V1_SX1500_CR0,0,1500,999_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjI3OTA3NjQ0M15BMl5BanBnXkFtZTgwMDQ0MDg3NDM@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BOTI5MjMyMDIxMF5BMl5BanBnXkFtZTgwODAxMjgwNDI@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMTQ2MTgyNzY2MV5BMl5BanBnXkFtZTgwOTA5MjkxNjE@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMGE2NTU5MjctMzYyNy00YjdjLWEwOGItOWNhZTQ2ZTZjY2Q0XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BZWUyMWVlMjEtNjRkYS00YjNlLThmODItYzc1MTQ5NzBiOGM2XkEyXkFqcGdeQXVyNjY5NDczMTk@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjI5OTcwMzIyNF5BMl5BanBnXkFtZTgwNjMxNDMzMTI@._V1_SY1000_CR0,0,1333,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjQwNTgxMTEwNl5BMl5BanBnXkFtZTgwNDc4MjkzNTM@._V1_SX1500_CR0,0,1500,999_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BMjI3OTA3NjQ0M15BMl5BanBnXkFtZTgwMDQ0MDg3NDM@._V1_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BOTI5MjMyMDIxMF5BMl5BanBnXkFtZTgwODAxMjgwNDI@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
+    'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMTQ2MTgyNzY2MV5BMl5BanBnXkFtZTgwOTA5MjkxNjE@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMGE2NTU5MjctMzYyNy00YjdjLWEwOGItOWNhZTQ2ZTZjY2Q0XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_.jpg',
     'https://m.media-amazon.com/images/M/MV5BZWUyMWVlMjEtNjRkYS00YjNlLThmODItYzc1MTQ5NzBiOGM2XkEyXkFqcGdeQXVyNjY5NDczMTk@._V1_.jpg',
@@ -45,14 +69,15 @@ export class MainComponent implements OnInit {
     'https://m.media-amazon.com/images/M/MV5BNDUxOTU4MjkwOF5BMl5BanBnXkFtZTgwODU0NzAzMTI@._V1_SY1000_CR0,0,1473,1000_AL_.jpg',
   ];
 
-  imgHeight = window.screen.availWidth / 3 + 'px';
-
+  imgHeight = Math.floor((window.screen.availWidth - 40) / 3) + 'px';
   image_prefix = `<div class="img-div" style="height:` + this.imgHeight + `;background: url(`;
-  image_postfix = `) 50% no-repeat;background-size: cover;"></div>`;
-  
+  image_postfix = `) 50% no-repeat;background-size: cover;border: 5px solid #fff;box-sizing: border-box;"></div>`;
   htmlArr = [];
+
+  fileName = '';
   
   ngOnInit() {
+    // console.log(window.screen.availWidth);
     
     this.items.forEach(el => {
       // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
@@ -61,7 +86,7 @@ export class MainComponent implements OnInit {
       this.htmlArr.push(this.image_prefix + el + this.image_postfix)
     });
 
-    console.log(this.htmlArr);
+    // console.log(this.htmlArr);
     
     // this.items = this.items.concat(this.moreItems);
     // var $container = jq('.grid');
@@ -97,17 +122,17 @@ export class MainComponent implements OnInit {
     //   //   itemSelector: '.grid-item'
     //   // });
 
-      setTimeout(() => {
-        this.moreItems.forEach(el => {
-          // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
-          // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
+      // setTimeout(() => {
+      //   this.moreItems.forEach(el => {
+      //     // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
+      //     // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
 
-          // this.htmlArr.push(this.image_prefix + el + this.image_postfix)
-        });
-        this.htmlArr.shift();
-        // masonry_today.layout();
-        // console.log('cat');
-      }, 2000);
+      //     // this.htmlArr.push(this.image_prefix + el + this.image_postfix)
+      //   });
+      //   this.htmlArr.shift();
+      //   // masonry_today.layout();
+      //   // console.log('cat');
+      // }, 2000);
 
     //   setTimeout(() => {
     //     // masonry_today.layout();
@@ -115,6 +140,35 @@ export class MainComponent implements OnInit {
     //   }, 2000);
     // }, 1000);
 
+  }
+  fileChange = false;
+  
+  imageReady(fileInput: any) {
+    console.log(fileInput.target.files);
+    let file = fileInput.target.files[0];
+    // this.fileChange = true;
+    let formData = new FormData();
+    formData.append('imageupload', file, file.name);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:49995/images/upload', true);
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        // File(s) uploaded.
+        console.log(200);
+      } else {
+        alert('An error occurred!');
+      }
+    };
+    xhr.send(formData);
+  }
+  
+  preventRedir($event) {
+    console.log($event);
+    // let test = this.elRef.nativeElement.querySelector('imageupload');
+    // test.submit();
+    // document.forms.namedItem('imageupload').submit();
+    $event.preventDefault();
   }
 
   takePhoto(): void {

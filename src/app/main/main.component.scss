@@ -70,7 +70,7 @@ mat-grid-list {
 }
 
 #take-photo {
-  display: none;
+  // display: none;
 }
 
 mat-button-toggle-group {
@@ -112,27 +112,31 @@ mat-button-toggle-group {
   height: calc(100vh - 106px) !important;
   overflow-y: auto;
   background-color: gray;
+  // padding-bottom: 20px;
   .grid-item {
     display: inline-block;
-    margin-top: 7px;
-    margin-bottom: 7px;
-    margin-left: 1.6%;
-    width: 30%;
-    height: 80px;
-    background-color: #00a651; // margin-bottom: 10px;
+    width: calc((100vw - 40px) / 3);
+    height: calc((100vw - 40px) / 3);
+    margin-top: 10px;
+    margin-left: 10px;
     box-shadow: 3px 3px 5px rgba(#000, .3);
-    .img-div {
-      height: 80px;
-    }
+    vertical-align: top;
     a {
-      display: block; // height: 0;
+      display: block;
+      height: calc((100vw - 40px) / 3);
+      // .img-div {
+      //   border: 3px solid green;
+        // height: 80px;
+        // border: 5px solid #fff;
+      // }
     }
-    img {
-      width: 100%;
-      box-sizing: border-box;
-      border: 6px solid #fff;
-      vertical-align: middle;
-    } // .item-img {
+    // img {
+    //   width: 100%;
+    //   box-sizing: border-box;
+    //   border: 6px solid #fff;
+    //   vertical-align: middle;
+    // }
+    // .item-img {
     //   display: block;
     //   background-repeat: no-repeat;
     //   background-size: 100% 100%;

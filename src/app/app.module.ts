@@ -16,7 +16,7 @@ import { MainComponent } from './main/main.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ResetComponent } from './reset/reset.component';
 
-import { SanitizeHtmlPipe } from './sanitize-html.pipe';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 
 const appRoutes: Routes = [
@@ -45,7 +45,7 @@ const appRoutes: Routes = [
     MainComponent,
     PageNotFoundComponent,
     ResetComponent,
-    SanitizeHtmlPipe
+    SafeHtmlPipe
   ],
   imports: [
     RouterModule.forRoot(
