@@ -1,8 +1,14 @@
-import { Component, Input, ElementRef, OnInit } from '@angular/core';
+import { Component, Input, Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 // import * as jq from 'jquery';
 
-import { SecurityContext } from '@angular/core';
+// import { SecurityContext } from '@angular/core';
 // import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
+// @Injectable()
+// export class ConfigService {
+//   constructor(private http: HttpClient) { }
+// }
 
 @Component({
   selector: 'app-main',
@@ -13,14 +19,8 @@ export class MainComponent implements OnInit {
   @Input() major: string;
   changeLog: string[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
-  
-  elRef: ElementRef;
-  local = [
-    '../../img/login_bg_bus.jpg',
-  ];
-  
 
   items = [
     'https://m.media-amazon.com/images/M/MV5BM2FhYjEyYmYtMDI1Yy00YTdlLWI2NWQtYmEzNzAxOGY1NjY2XkEyXkFqcGdeQXVyNTA3NTIyNDg@._V1_UX182_CR0,0,182,268_AL_.jpg',
@@ -28,9 +28,9 @@ export class MainComponent implements OnInit {
     'https://m.media-amazon.com/images/M/MV5BMmE2M2I4MWYtM2NiOC00OGM0LTllNWQtZDhlMjNlNjg5NzUwXkEyXkFqcGdeQXVyNjczMDc2NDQ@._V1_SY1000_SX1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMzAxNTY3ODg0NF5BMl5BanBnXkFtZTgwMjk2Njk5NDM@._V1_SX1777_CR0,0,1777,937_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BNDg1NDYyNjUxNV5BMl5BanBnXkFtZTgwMTAwNjQxMzI@._V1_SY1000_SX1000_AL_.jpg',
-  // ];
-  
-  // moreItems = [
+    // ];
+
+    // moreItems = [
     'https://m.media-amazon.com/images/M/MV5BMTQ2MTgyNzY2MV5BMl5BanBnXkFtZTgwOTA5MjkxNjE@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMGE2NTU5MjctMzYyNy00YjdjLWEwOGItOWNhZTQ2ZTZjY2Q0XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_.jpg',
     'https://m.media-amazon.com/images/M/MV5BZWUyMWVlMjEtNjRkYS00YjNlLThmODItYzc1MTQ5NzBiOGM2XkEyXkFqcGdeQXVyNjY5NDczMTk@._V1_.jpg',
@@ -75,19 +75,19 @@ export class MainComponent implements OnInit {
   htmlArr = [];
 
   fileName = '';
-  
+
   ngOnInit() {
     // console.log(window.screen.availWidth);
-    
+
     this.items.forEach(el => {
       // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
       // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
-      
+
       this.htmlArr.push(this.image_prefix + el + this.image_postfix)
     });
 
     // console.log(this.htmlArr);
-    
+
     // this.items = this.items.concat(this.moreItems);
     // var $container = jq('.grid');
     // $container.masonry({
@@ -122,17 +122,17 @@ export class MainComponent implements OnInit {
     //   //   itemSelector: '.grid-item'
     //   // });
 
-      // setTimeout(() => {
-      //   this.moreItems.forEach(el => {
-      //     // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
-      //     // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
+    // setTimeout(() => {
+    //   this.moreItems.forEach(el => {
+    //     // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
+    //     // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
 
-      //     // this.htmlArr.push(this.image_prefix + el + this.image_postfix)
-      //   });
-      //   this.htmlArr.shift();
-      //   // masonry_today.layout();
-      //   // console.log('cat');
-      // }, 2000);
+    //     // this.htmlArr.push(this.image_prefix + el + this.image_postfix)
+    //   });
+    //   this.htmlArr.shift();
+    //   // masonry_today.layout();
+    //   // console.log('cat');
+    // }, 2000);
 
     //   setTimeout(() => {
     //     // masonry_today.layout();
@@ -141,28 +141,40 @@ export class MainComponent implements OnInit {
     // }, 1000);
 
   }
-  fileChange = false;
-  
-  imageReady(fileInput: any) {
-    console.log(fileInput.target.files);
-    let file = fileInput.target.files[0];
-    // this.fileChange = true;
-    let formData = new FormData();
-    formData.append('imageupload', file, file.name);
+  // fileChange = false;
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:49995/images/upload', true);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        // File(s) uploaded.
-        console.log(200);
-      } else {
-        alert('An error occurred!');
-      }
-    };
-    xhr.send(formData);
+  photoReady(fileInput: any) {
+    console.log(fileInput.target.files);
+    if (fileInput.target.files.length) {
+      
+      
+      let file = fileInput.target.files[0];
+      // this.fileChange = true;
+      let formData = new FormData();
+      formData.append('imageupload', file, file.name);
+      
+      // let xhr = new XMLHttpRequest();
+      // xhr.open('POST', 'http://localhost:49995/images/upload', true);
+      // xhr.onload = () => {
+      //   if (xhr.status === 200) {
+      //     console.log(200);
+      //   } else {
+      //     alert('An error occurred!');
+      //   }
+      // };
+      // xhr.send(formData);
+
+      this.http.post('http://localhost:49995/images/upload', formData)
+      .subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          console.log(err);
+        }
+      )
+    }
   }
-  
+
   preventRedir($event) {
     console.log($event);
     // let test = this.elRef.nativeElement.querySelector('imageupload');

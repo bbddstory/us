@@ -69,8 +69,8 @@ mat-grid-list {
   background: $green url(../../ico/baseline-insert_photo-24px.svg) 50% no-repeat;
 }
 
-#take-photo {
-  // display: none;
+form[name=imageUploadForm] {
+  display: none;
 }
 
 mat-button-toggle-group {

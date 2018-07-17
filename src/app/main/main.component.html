@@ -39,7 +39,7 @@
   <input type="submit">
 </form> -->
 
-<div class="divider-today">今天</div>
+<div class="divider-today">Today</div>
 <div class="masonry-grid-today">
   <!-- <div class="col-width"></div> -->
   <div class="grid-item" style="" *ngFor="let item of htmlArr; let i = index">
@@ -54,15 +54,21 @@
   <input type="file" accept="image/*" capture="camera" />
 </div> -->
 <label for="take-photo" class="fn-btn take-photo">
-    <!-- <button (click)="submitImage()">TEST</button> -->
-<form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data"
-  (submit)="preventRedir($event)">
-    <input id="take-photo" type="file" name="imageupload" accept="image/*" capture="camera" style="display: none;" (change)="imageReady($event)"/>
-    <input type="submit" [style.display]="fileChange ? 'block' : 'none'" value="Upload">
+  <!-- <button (click)="submitImage()">TEST</button> -->
+  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data"
+    (submit)="preventRedir($event)">
+      <input id="take-photo" type="file" name="imageupload" accept="image/*" capture="camera" (change)="photoReady($event)"/>
+      <!-- <input type="submit" [style.display]="fileChange ? 'block' : 'none'" value="Upload"> -->
   </form>
 </label>
-<div class="fn-btn add-photo">
-</div>
+
+<label for="upload-photo" class="fn-btn add-photo">
+  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data"
+    (submit)="preventRedir($event)">
+      <input id="upload-photo" type="file" name="imageupload" accept="image/*" (change)="photoReady($event)"/>
+      <!-- <input type="submit" [style.display]="fileChange ? 'block' : 'none'" value="Upload"> -->
+  </form>
+</label>
 
 <!-- <mat-button-toggle-group #group="matButtonToggleGroup">
   <mat-button-toggle value="module" checked>
