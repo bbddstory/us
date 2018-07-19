@@ -1,6 +1,7 @@
 import { Component, Input, Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 // import * as jq from 'jquery';
+import ImageCompressor from 'image-compressor.js';
 
 // import { SecurityContext } from '@angular/core';
 // import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -28,9 +29,6 @@ export class MainComponent implements OnInit {
     'https://m.media-amazon.com/images/M/MV5BMmE2M2I4MWYtM2NiOC00OGM0LTllNWQtZDhlMjNlNjg5NzUwXkEyXkFqcGdeQXVyNjczMDc2NDQ@._V1_SY1000_SX1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMzAxNTY3ODg0NF5BMl5BanBnXkFtZTgwMjk2Njk5NDM@._V1_SX1777_CR0,0,1777,937_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BNDg1NDYyNjUxNV5BMl5BanBnXkFtZTgwMTAwNjQxMzI@._V1_SY1000_SX1000_AL_.jpg',
-    // ];
-
-    // moreItems = [
     'https://m.media-amazon.com/images/M/MV5BMTQ2MTgyNzY2MV5BMl5BanBnXkFtZTgwOTA5MjkxNjE@._V1_SY1000_CR0,0,1502,1000_AL_.jpg',
     'https://m.media-amazon.com/images/M/MV5BMGE2NTU5MjctMzYyNy00YjdjLWEwOGItOWNhZTQ2ZTZjY2Q0XkEyXkFqcGdeQXVyMjk3NTUyOTc@._V1_.jpg',
     'https://m.media-amazon.com/images/M/MV5BZWUyMWVlMjEtNjRkYS00YjNlLThmODItYzc1MTQ5NzBiOGM2XkEyXkFqcGdeQXVyNjY5NDczMTk@._V1_.jpg',
@@ -73,86 +71,115 @@ export class MainComponent implements OnInit {
   image_prefix = `<div class="img-div" style="height:` + this.imgHeight + `;background: url(`;
   image_postfix = `) 50% no-repeat;background-size: cover;border: 5px solid #fff;box-sizing: border-box;"></div>`;
   htmlArr = [];
-
   fileName = '';
 
   ngOnInit() {
-    // console.log(window.screen.availWidth);
-
     this.items.forEach(el => {
       // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
       // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
 
       this.htmlArr.push(this.image_prefix + el + this.image_postfix)
     });
-
-    // console.log(this.htmlArr);
-
-    // this.items = this.items.concat(this.moreItems);
-    // var $container = jq('.grid');
-    // $container.masonry({
-    //   columnWidth: 200,
-    //   itemSelector: '.grid-item'
-    // });
-
-    // jq('.grid').masonry({
-    //   // options
-    //   itemSelector: '.grid-item',
-    //   columnWidth: 200
-    // });
-    // var masonry_today;
-    // setTimeout(() => {
-    //   var container_today = document.querySelector('.masonry-grid-today');
-    //   // masonry_today = new Masonry(container_today, {
-    //   //   columnWidth: window.screen.availWidth / 3,
-    //   //   // columnWidth: '.col-width',
-    //   //   itemSelector: '.grid-item',
-    //   //   percentPosition: true
-    //   // });
-
-    //   // var container_yesterday = document.querySelector('.masonry-grid-yesterday');
-    //   // var masonry_yesterday = new Masonry(container_yesterday, {
-    //   //   columnWidth: window.screen.availWidth / 3,
-    //   //   itemSelector: '.grid-item'
-    //   // });
-
-    //   // var container_more = document.querySelector('.masonry-grid-more');
-    //   // var masonry_more = new Masonry(container_more, {
-    //   //   columnWidth: window.screen.availWidth / 3,
-    //   //   itemSelector: '.grid-item'
-    //   // });
-
-    // setTimeout(() => {
-    //   this.moreItems.forEach(el => {
-    //     // return this._sanitizer.sanitize(SecurityContext.HTML, this._htmlProperty);
-    //     // console.log(this._sanitizer.sanitize(SecurityContext.HTML, this.image_prefix + el + this.image_postfix));
-
-    //     // this.htmlArr.push(this.image_prefix + el + this.image_postfix)
-    //   });
-    //   this.htmlArr.shift();
-    //   // masonry_today.layout();
-    //   // console.log('cat');
-    // }, 2000);
-
-    //   setTimeout(() => {
-    //     // masonry_today.layout();
-    //     console.log('layout');
-    //   }, 2000);
-    // }, 1000);
-
   }
   // fileChange = false;
 
   photoReady(fileInput: any) {
     console.log(fileInput.target.files);
     if (fileInput.target.files.length) {
-      
-      
+
       let file = fileInput.target.files[0];
+      // console.log(file);      
       // this.fileChange = true;
-      let formData = new FormData();
-      formData.append('imageupload', file, file.name);
-      
+
+      let img = new Image(), optThumb = {}, optLarge = {};
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        console.log(img.naturalWidth, img.naturalHeight);
+
+        if (img.naturalWidth >= img.naturalHeight) {
+          // Portrait image
+          optThumb = {
+            quality: .2,
+            maxWidth: 540,
+            maxHeight: 960
+          }
+          optLarge = {
+            quality: .7,
+            maxWidth: 1080,
+            maxHeight: 1920
+          }
+        } else {
+          // Landscape image
+          optThumb = {
+            quality: .2,
+            maxWidth: 960,
+            maxHeight: 540
+          }
+          optLarge = {
+            quality: .7,
+            maxWidth: 1920,
+            maxHeight: 1080
+          }
+        }
+        // Memory must be released
+        window.URL.revokeObjectURL(img.src);
+      };
+
+
+      // const imageCompressor = new ImageCompressor();
+
+      // imageCompressor.compress(file, {
+      // checkOrientation: false,
+      // Options for thumbnails
+      // quality: .2,
+      // maxWidth: 540,
+      // maxHeight: 960
+      // Options for enlarged photos
+      //   quality: .7,
+      //   maxWidth: 1080,
+      //   maxHeight: 1920
+      // }).then((result) => {
+      //   // Handle the compressed image file.
+      //   const formData = new FormData();
+
+      //   formData.append('imageupload', result, file.name);
+
+      //   this.http.post('http://us.foreverjuniordev.com:49995/images/upload', formData)
+      //     .subscribe(
+      //       res => {
+      //         console.log(res);
+      //       }, err => {
+      //         console.log(err);
+      //       }
+      //     )
+      // }).catch((err) => {
+      // })
+
+      // const imageCompressor = new ImageCompressor(file, {
+      //   quality: .7,
+      //   maxWidth: 1080,
+      //   maxHeight: 1920,
+      //   success(result) {
+      //     const formData = new FormData();
+
+      //     formData.append('imageupload', result, file.name);
+
+      //     this.http.post('http://localhost:49995/images/upload', formData)
+      //       .subscribe(
+      //         res => {
+      //           console.log(res);
+      //         }, err => {
+      //           console.log(err);
+      //         }
+      //       )
+      //   }, error(e) {
+      //     console.log(e.message);
+      //   },
+      // });
+
+      // let formData = new FormData();
+      // formData.append('imageupload', file, file.name);
+
       // let xhr = new XMLHttpRequest();
       // xhr.open('POST', 'http://localhost:49995/images/upload', true);
       // xhr.onload = () => {
@@ -164,39 +191,25 @@ export class MainComponent implements OnInit {
       // };
       // xhr.send(formData);
 
-      this.http.post('http://localhost:49995/images/upload', formData)
-      .subscribe(
-        res => {
-          console.log(res);
-        }, err => {
-          console.log(err);
-        }
-      )
+      // this.http.post('http://localhost:49995/images/upload', formData)
+      // .subscribe(
+      //   res => {
+      //     console.log(res);
+      //   }, err => {
+      //     console.log(err);
+      //   }
+      // )
     }
   }
 
-  preventRedir($event) {
-    console.log($event);
-    // let test = this.elRef.nativeElement.querySelector('imageupload');
-    // test.submit();
-    // document.forms.namedItem('imageupload').submit();
-    $event.preventDefault();
-  }
-
   takePhoto(): void {
-    console.log(123);
-
     var promise = navigator.mediaDevices.getUserMedia({
       audio: true,
       video: { facingMode: "user" }
     }).then(function (stream) {
       console.log('abc');
-
-      /* use the stream */
     }).catch(function (err) {
       console.log(err);
-      /* handle the error */
     });
   }
-
 }

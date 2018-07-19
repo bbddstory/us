@@ -39,7 +39,7 @@
   <input type="submit">
 </form> -->
 
-<div class="divider-today">Today</div>
+<!-- <div class="divider-today">Today</div> -->
 <div class="masonry-grid-today">
   <!-- <div class="col-width"></div> -->
   <div class="grid-item" style="" *ngFor="let item of htmlArr; let i = index">
@@ -55,16 +55,14 @@
 </div> -->
 <label for="take-photo" class="fn-btn take-photo">
   <!-- <button (click)="submitImage()">TEST</button> -->
-  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data"
-    (submit)="preventRedir($event)">
+  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data">
       <input id="take-photo" type="file" name="imageupload" accept="image/*" capture="camera" (change)="photoReady($event)"/>
       <!-- <input type="submit" [style.display]="fileChange ? 'block' : 'none'" value="Upload"> -->
   </form>
 </label>
 
 <label for="upload-photo" class="fn-btn add-photo">
-  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data"
-    (submit)="preventRedir($event)">
+  <form name="imageUploadForm" action="http://localhost:49995/images/upload" method="post" enctype="multipart/form-data">
       <input id="upload-photo" type="file" name="imageupload" accept="image/*" (change)="photoReady($event)"/>
       <!-- <input type="submit" [style.display]="fileChange ? 'block' : 'none'" value="Upload"> -->
   </form>
