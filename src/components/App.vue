@@ -12,7 +12,7 @@
         <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
           <md-icon>menu</md-icon>
         </md-button>
-        <span class="md-title">My Title</span>
+        <span class="md-title">{{title}}</span>
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible">
@@ -72,20 +72,20 @@
 
 <script>
 import Masonry from "./Masonry.vue";
-import Navbar from "./Navbar.vue";
+// import Navbar from "./Navbar.vue";
 import TakePhoto from "./TakePhoto.vue";
 import UploadImage from "./UploadImage.vue";
 
 export default {
   name: "app-comp",
   components: {
-    Navbar,
+    // Navbar,
     Masonry,
     TakePhoto,
     UploadImage
   },
   data: () => ({
-    title: "App.vue Component",
+    title: "San Diego Comic-Con",
     menuVisible: false
   })
 };
@@ -101,6 +101,13 @@ h1 {
 .md-app {
   max-height: 100vh;
   // border: 1px solid rgba(#000, 0.12);
+  .md-primary {
+    background: #00a651 !important;
+  }
+  .md-app-content {
+    padding: 10px;
+    background: #555 url('../images/masonry_bg.png') repeat;
+  }
 }
 
 // Demo purposes only

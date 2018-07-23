@@ -1,4 +1,5 @@
 import Vue from "vue";
+import VueRouter from "vue-router";
 import App from "../components/App.vue";
 
 Vue.config.productionTip = false;
@@ -9,15 +10,26 @@ import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
 import VueMasonry from 'vue-masonry-css';
 
+Vue.use(VueRouter);
 Vue.use(VueMaterial);
 Vue.use(VueMasonry);
 // Vue.use(MdButton)
 // Vue.use(MdContent)
 // Vue.use(MdTabs)
 
+const routes = [
+    // { path: '/login', component: Bar },
+    { path: '/main', component: App },
+]
+
+const router = new VueRouter({
+  routes // short for `routes: routes`
+})
+
 new Vue({
-    el: '#app-root',
-    render: h => h(App),
+    router,
+    // el: '#app-root',
+    // render: h => h(App),
     // components: { App },
     // template: '<App/>',
-})
+}).$mount('#app-root')
