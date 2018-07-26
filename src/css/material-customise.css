@@ -1,0 +1,10 @@
+::-webkit-scrollbar {
+    width: 0px !important;
+    /* remove scrollbar space */
+    background: transparent !important;
+    /* optional: just make scrollbar invisible */
+}
+
+.md-app-toolbar {
+    position: fixed !important;
+}

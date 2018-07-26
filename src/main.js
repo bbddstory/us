@@ -9,6 +9,7 @@ import VueMasonry from 'vue-masonry-css';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
 import './css/roboto.css';
+import './css/material-customise.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
