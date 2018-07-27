@@ -19,3 +19,5 @@ npm run build
 ```
 npm run lint
 ```
+
+<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">

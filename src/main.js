@@ -29,3 +29,12 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+// window.screen.lockOrientation("portrait");
+// screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+
+// if (screen.lockOrientationUniversal("landscape-primary")) {
+//   // orientation was locked
+// } else {
+//   // orientation lock failed
+// }

@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "exif-js": "^2.3.0",
     "image-compressor.js": "^1.1.4",
     "vue": "^2.5.16",
     "vue-masonry-css": "^1.0.2",

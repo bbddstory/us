@@ -6,5 +6,11 @@
 }
 
 .md-app-toolbar {
+    /**
+     * The original value was absolute, which caused
+     * the navbar to jump down irregularly when the 
+     * page was scrolled up. Override it as 'fixed' seem
+     * to fix the problem (no pun intended).
+     */
     position: fixed !important;
 }
