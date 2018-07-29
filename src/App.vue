@@ -26,7 +26,7 @@
           </md-list-item>
 
           <md-list-item>
-            <md-icon>share</md-icon>
+            <md-icon>people</md-icon>
             <span class="md-list-item-text">Share Album</span>
           </md-list-item>
 
